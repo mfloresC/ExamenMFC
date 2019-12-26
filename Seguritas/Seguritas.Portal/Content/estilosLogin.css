@@ -1,0 +1,23 @@
+﻿.jumbotron {
+    margin-top: 100px;
+    margin-left: 400px;
+    margin-right: 400px;
+    border-radius: 5%;
+    border : solid .5px;
+}
+
+.hasError {
+    background-color: #CD5C5C !important;
+    border: 1px solid #FF0000 !important;
+}
+
+.hasError:focus {
+    border-color: red !important;
+}
+
+@media only screen and (max-width:991px) {
+    .jumbotron {
+        margin-left: 100px;
+        margin-right: 100px;
+    }
+}

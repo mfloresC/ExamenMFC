@@ -1,0 +1,113 @@
+﻿@using Seguritas.Auxiliar;
+@{
+    var coberturas = (List<CoberturaContrato>)ViewData["lstCoberturas"];
+}
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Consulta de Coberturas</title>
+
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <script type="text/javascript" src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <link href="~/Content/estilosCobertura.css" rel="stylesheet" />
+    <script type="text/javascript" src="~/Scripts/funcionesCobertura.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+    <script>
+        window.rootUrl = "@Url.Content("~/")";
+    </script>
+</head>
+<body>
+    <nav class="nav">
+        <ul class="nav nav-tabs">
+            <li class="nav-item">
+                <a class="nav-link active" id="Cliente/Page">Clientes</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="Plan/Page">Planes</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="Cobertura/Page">Coberturas</a>
+            </li>
+        </ul>
+    </nav>
+    <h2 style="text-align:center;"> Consulta de Coberturas </h2>
+    <span style="float:right; margin-right:30px;"><a id="lnkCerrar">Cerrar Sesión</a></span>
+    <hr />
+    <button id="btnNuevo" class="btn btn-primary" style="float:right; margin-right:150px; margin-top: 30px;">Nueva Cobertura</button>
+    <div id="divConsulta" class="jumbotron row">
+        <div class="container">
+            <div id="seccionTabla" class="col-md-12">
+                <table id="tblConsulta" class="table table-responsive">
+                    <thead>
+                        <tr>
+                            <th style="text-align: center !important;">No. Cobertura</th>
+                            <th style="text-align: center !important;">Nombre</th>
+                            <th style="text-align: center !important;">Suma Asegurada</th>
+                            <th style="text-align: center !important;">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (coberturas != null)
+                        {
+                            foreach (var cobertura in coberturas)
+                            {
+                                <tr>
+                                    <td name="scCoId" style="text-align: center">@cobertura.scCoId</td>
+                                    <td name="scCoNombre" style="text-align: center">@cobertura.scCoNombre</td>
+                                    <td name="scCobSuma" style="text-align: center">@cobertura.scCobSuma</td>
+                                    <td>
+                                        <div class="form-group text-center">
+                                            <button class="btn lineAjust btn-primary delete">Borrar</button>
+                                            <button class="btn lineAjust btn-primary update">Actualizar</button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+                            <tr>
+                                <td colspan="4">Sin registros</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div id="divCobertura" class="jumbotron ajuste" style="display: none;">
+        <div class="container">
+            <form id="frmRegistroPlan">
+                <div class="container">
+                    <h2>Registro de Cobertura</h2>
+                    <b>Los campos marcados con * deberán ser ingresados obligatoriamente.</b>
+                    <br /><br />
+                    <div class="form-group">
+                        <b>*Nombre de la Cobertura</b>
+                        <input maxlength="20" type="text" id="txtNombre" name="scCoNombre" onkeypress="return letra(event)" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <b>*Suma Asegurada</b>
+                        <input maxlength="20" type="text" id="txtSumaA" name="scCobSuma" class="form-control" />
+                    </div>
+                    <div class="form-group text-center">
+                        <button id="btnSalir" class="btn btn-primary">Salir</button>
+                        <button id="btnGuardar" class="btn btn-primary" data-cve="">Guardar</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script>
+        function letra(e) {
+            tecla = (document.all) ? e.keyCode : e.which;
+            if (tecla == 8) return true;
+            patron = /[A-Za-z\s]/;
+            te = String.fromCharCode(tecla);
+            return patron.test(te);
+        }
+    </script>
+</body>
+</html>

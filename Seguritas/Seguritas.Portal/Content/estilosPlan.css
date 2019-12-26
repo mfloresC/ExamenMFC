@@ -1,0 +1,34 @@
+﻿body {
+}
+
+.jumbotron {
+    margin-top: 50px;
+    margin-left: 150px;
+    margin-right: 150px;
+    text-align: center;
+}
+
+.ajuste {
+    margin-left: 300px !important;
+    margin-right: 300px !important;
+}
+
+.hasError {
+    background-color: #CD5C5C !important;
+    border: 1px solid #FF0000 !important;
+}
+
+    .hasError:focus {
+        border-color: red !important;
+    }
+
+.lineAjust {
+    margin-left: 6px;
+}
+
+@media only screen and (max-width:991px) {
+    .jumbotron {
+        margin-left: 90px;
+        margin-right: 90px;
+    }
+}

@@ -1,0 +1,78 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>:: Login ::</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/estilosLogin.css" rel="stylesheet" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+    <script>
+        window.rootUrl = "@Url.Content("~/")";
+    </script>
+</head>
+
+<body>
+    <div id="divLogin" class="jumbotron">
+        <div class="container">
+            <hr />
+            <h2>Inicio de sesión</h2>
+            <div class="form-group">
+                <b>*Usuario</b>
+                <input maxlength="20" type="text" id="txtUsuario" class="form-control" name="scUUsuario" placeholder="Escribe tu Usuario" />
+            </div>
+            <div class="form-group">
+                <b>*Contraseña</b>
+                <input maxlength="20" type="password" id="txtContrasenia" name="scUPassword" class="form-control" placeholder="Escribe tu contraseña" />
+                <span><a id="lnkNuevoRegistro"><strong>Ingresar Nuevo Usuario</strong></a></span>
+            </div>
+            <div class="text-center">
+                <button value="Entrar" id="btnLogin" class="btn btn-primary">Ingresar</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="divRegistro" class="jumbotron" style="display: none;">
+        <form id="frmRegistroAlumno">
+            <div class="container">
+                <h2>Registro de Usuario</h2>
+                <b>Ingrese los datos para crear una cuenta.</b><br /><br />
+                <div class="form-group">
+                    <b>*Usuario</b>
+                    <input maxlength="20" type="text" id="txtUser" name="scUUsuario" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <b>*Contraseña</b>
+                    <input maxlength="20" type="text" id="txtPassword" name="scUPassword" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <b>*Nombre</b>
+                    <input maxlength="20" type="text" id="txtNombre" name="scUNombre" class="form-control" onkeypress="return letra(event)" />
+                </div>
+                <b>Los campos marcados con * deberán ser ingresados obligatoriamente.</b>
+                <br /><br /><br />
+                <div class="form-group text-center">
+                    <button id="btnSalir" class="btn btn-primary">Salir</button>
+                    <button id="btnCrear" class="btn btn-primary">Guardar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <script type="text/javascript" src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/funcionesLogin.js"></script>
+    <script>
+        function letra(e) {
+            tecla = (document.all) ? e.keyCode : e.which;
+            if (tecla == 8) return true;
+            patron = /[A-Za-z\s]/;
+            te = String.fromCharCode(tecla);
+            return patron.test(te);
+        }
+    </script>
+</body>
+</html>

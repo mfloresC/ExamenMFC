@@ -1,0 +1,365 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="SeguritasModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="scCliente">
+          <Key>
+            <PropertyRef Name="scCId" />
+          </Key>
+          <Property Name="scCId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="scCNombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="scCFechaMod" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="scCobertura">
+          <Key>
+            <PropertyRef Name="scCoId" />
+          </Key>
+          <Property Name="scCoId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="scCoNombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="scCobSuma" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="scCoFechaMod" Type="datetime" Nullable="false" />
+          <Property Name="scCoEstatus" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="scPlan">
+          <Key>
+            <PropertyRef Name="scPId" />
+          </Key>
+          <Property Name="scPId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="scPNombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="scPFechaMod" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="scUsuario">
+          <Key>
+            <PropertyRef Name="scUId" />
+          </Key>
+          <Property Name="scUId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="scUNombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="scUUsuario" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="scUPassword" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="soClientePlan">
+          <Key>
+            <PropertyRef Name="soCPId" />
+          </Key>
+          <Property Name="soCPId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="soCPCId" Type="int" Nullable="false" />
+          <Property Name="soCPPId" Type="int" Nullable="false" />
+          <Property Name="soCPEstatus" Type="bit" Nullable="false" />
+          <Property Name="soCPFechaMod" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="soPlanCobertura">
+          <Key>
+            <PropertyRef Name="soPCoId" />
+          </Key>
+          <Property Name="soPCoId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="soPCoPId" Type="int" Nullable="false" />
+          <Property Name="soPCoCoId" Type="int" Nullable="false" />
+          <Property Name="soPCoEstatus" Type="bit" Nullable="false" />
+          <Property Name="soPCoFechaMod" Type="datetime" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_soClientePlan_CId">
+          <End Role="scCliente" Type="Self.scCliente" Multiplicity="1" />
+          <End Role="soClientePlan" Type="Self.soClientePlan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="scCliente">
+              <PropertyRef Name="scCId" />
+            </Principal>
+            <Dependent Role="soClientePlan">
+              <PropertyRef Name="soCPCId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_soClientePlan_PId">
+          <End Role="scPlan" Type="Self.scPlan" Multiplicity="1" />
+          <End Role="soClientePlan" Type="Self.soClientePlan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="scPlan">
+              <PropertyRef Name="scPId" />
+            </Principal>
+            <Dependent Role="soClientePlan">
+              <PropertyRef Name="soCPPId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_soPlanCobertura_CoId">
+          <End Role="scCobertura" Type="Self.scCobertura" Multiplicity="1" />
+          <End Role="soPlanCobertura" Type="Self.soPlanCobertura" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="scCobertura">
+              <PropertyRef Name="scCoId" />
+            </Principal>
+            <Dependent Role="soPlanCobertura">
+              <PropertyRef Name="soPCoCoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_soPlanCobertura_PId">
+          <End Role="scPlan" Type="Self.scPlan" Multiplicity="1" />
+          <End Role="soPlanCobertura" Type="Self.soPlanCobertura" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="scPlan">
+              <PropertyRef Name="scPId" />
+            </Principal>
+            <Dependent Role="soPlanCobertura">
+              <PropertyRef Name="soPCoPId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SeguritasModelStoreContainer">
+          <EntitySet Name="scCliente" EntityType="Self.scCliente" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="scCobertura" EntityType="Self.scCobertura" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="scPlan" EntityType="Self.scPlan" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="scUsuario" EntityType="Self.scUsuario" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="soClientePlan" EntityType="Self.soClientePlan" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="soPlanCobertura" EntityType="Self.soPlanCobertura" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_soClientePlan_CId" Association="Self.FK_soClientePlan_CId">
+            <End Role="scCliente" EntitySet="scCliente" />
+            <End Role="soClientePlan" EntitySet="soClientePlan" />
+          </AssociationSet>
+          <AssociationSet Name="FK_soClientePlan_PId" Association="Self.FK_soClientePlan_PId">
+            <End Role="scPlan" EntitySet="scPlan" />
+            <End Role="soClientePlan" EntitySet="soClientePlan" />
+          </AssociationSet>
+          <AssociationSet Name="FK_soPlanCobertura_CoId" Association="Self.FK_soPlanCobertura_CoId">
+            <End Role="scCobertura" EntitySet="scCobertura" />
+            <End Role="soPlanCobertura" EntitySet="soPlanCobertura" />
+          </AssociationSet>
+          <AssociationSet Name="FK_soPlanCobertura_PId" Association="Self.FK_soPlanCobertura_PId">
+            <End Role="scPlan" EntitySet="scPlan" />
+            <End Role="soPlanCobertura" EntitySet="soPlanCobertura" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SeguritasModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="scCliente">
+          <Key>
+            <PropertyRef Name="scCId" />
+          </Key>
+          <Property Name="scCId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="scCNombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="scCFechaMod" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="soClientePlan" Relationship="Self.FK_soClientePlan_CId" FromRole="scCliente" ToRole="soClientePlan" />
+        </EntityType>
+        <EntityType Name="scCobertura">
+          <Key>
+            <PropertyRef Name="scCoId" />
+          </Key>
+          <Property Name="scCoId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="scCoNombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="scCobSuma" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="scCoFechaMod" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="scCoEstatus" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="soPlanCobertura" Relationship="Self.FK_soPlanCobertura_CoId" FromRole="scCobertura" ToRole="soPlanCobertura" />
+        </EntityType>
+        <EntityType Name="scPlan">
+          <Key>
+            <PropertyRef Name="scPId" />
+          </Key>
+          <Property Name="scPId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="scPNombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="scPFechaMod" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="soClientePlan" Relationship="Self.FK_soClientePlan_PId" FromRole="scPlan" ToRole="soClientePlan" />
+          <NavigationProperty Name="soPlanCobertura" Relationship="Self.FK_soPlanCobertura_PId" FromRole="scPlan" ToRole="soPlanCobertura" />
+        </EntityType>
+        <EntityType Name="scUsuario">
+          <Key>
+            <PropertyRef Name="scUId" />
+          </Key>
+          <Property Name="scUId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="scUNombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="scUUsuario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="scUPassword" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="soClientePlan">
+          <Key>
+            <PropertyRef Name="soCPId" />
+          </Key>
+          <Property Name="soCPId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="soCPCId" Type="Int32" Nullable="false" />
+          <Property Name="soCPPId" Type="Int32" Nullable="false" />
+          <Property Name="soCPEstatus" Type="Boolean" Nullable="false" />
+          <Property Name="soCPFechaMod" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="scCliente" Relationship="Self.FK_soClientePlan_CId" FromRole="soClientePlan" ToRole="scCliente" />
+          <NavigationProperty Name="scPlan" Relationship="Self.FK_soClientePlan_PId" FromRole="soClientePlan" ToRole="scPlan" />
+        </EntityType>
+        <EntityType Name="soPlanCobertura">
+          <Key>
+            <PropertyRef Name="soPCoId" />
+          </Key>
+          <Property Name="soPCoId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="soPCoPId" Type="Int32" Nullable="false" />
+          <Property Name="soPCoCoId" Type="Int32" Nullable="false" />
+          <Property Name="soPCoEstatus" Type="Boolean" Nullable="false" />
+          <Property Name="soPCoFechaMod" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="scCobertura" Relationship="Self.FK_soPlanCobertura_CoId" FromRole="soPlanCobertura" ToRole="scCobertura" />
+          <NavigationProperty Name="scPlan" Relationship="Self.FK_soPlanCobertura_PId" FromRole="soPlanCobertura" ToRole="scPlan" />
+        </EntityType>
+        <Association Name="FK_soClientePlan_CId">
+          <End Role="scCliente" Type="Self.scCliente" Multiplicity="1" />
+          <End Role="soClientePlan" Type="Self.soClientePlan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="scCliente">
+              <PropertyRef Name="scCId" />
+            </Principal>
+            <Dependent Role="soClientePlan">
+              <PropertyRef Name="soCPCId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_soPlanCobertura_CoId">
+          <End Role="scCobertura" Type="Self.scCobertura" Multiplicity="1" />
+          <End Role="soPlanCobertura" Type="Self.soPlanCobertura" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="scCobertura">
+              <PropertyRef Name="scCoId" />
+            </Principal>
+            <Dependent Role="soPlanCobertura">
+              <PropertyRef Name="soPCoCoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_soClientePlan_PId">
+          <End Role="scPlan" Type="Self.scPlan" Multiplicity="1" />
+          <End Role="soClientePlan" Type="Self.soClientePlan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="scPlan">
+              <PropertyRef Name="scPId" />
+            </Principal>
+            <Dependent Role="soClientePlan">
+              <PropertyRef Name="soCPPId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_soPlanCobertura_PId">
+          <End Role="scPlan" Type="Self.scPlan" Multiplicity="1" />
+          <End Role="soPlanCobertura" Type="Self.soPlanCobertura" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="scPlan">
+              <PropertyRef Name="scPId" />
+            </Principal>
+            <Dependent Role="soPlanCobertura">
+              <PropertyRef Name="soPCoPId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SeguritasEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="scCliente" EntityType="Self.scCliente" />
+          <EntitySet Name="scCobertura" EntityType="Self.scCobertura" />
+          <EntitySet Name="scPlan" EntityType="Self.scPlan" />
+          <EntitySet Name="scUsuario" EntityType="Self.scUsuario" />
+          <EntitySet Name="soClientePlan" EntityType="Self.soClientePlan" />
+          <EntitySet Name="soPlanCobertura" EntityType="Self.soPlanCobertura" />
+          <AssociationSet Name="FK_soClientePlan_CId" Association="Self.FK_soClientePlan_CId">
+            <End Role="scCliente" EntitySet="scCliente" />
+            <End Role="soClientePlan" EntitySet="soClientePlan" />
+          </AssociationSet>
+          <AssociationSet Name="FK_soPlanCobertura_CoId" Association="Self.FK_soPlanCobertura_CoId">
+            <End Role="scCobertura" EntitySet="scCobertura" />
+            <End Role="soPlanCobertura" EntitySet="soPlanCobertura" />
+          </AssociationSet>
+          <AssociationSet Name="FK_soClientePlan_PId" Association="Self.FK_soClientePlan_PId">
+            <End Role="scPlan" EntitySet="scPlan" />
+            <End Role="soClientePlan" EntitySet="soClientePlan" />
+          </AssociationSet>
+          <AssociationSet Name="FK_soPlanCobertura_PId" Association="Self.FK_soPlanCobertura_PId">
+            <End Role="scPlan" EntitySet="scPlan" />
+            <End Role="soPlanCobertura" EntitySet="soPlanCobertura" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SeguritasModelStoreContainer" CdmEntityContainer="SeguritasEntities">
+          <EntitySetMapping Name="scCliente">
+            <EntityTypeMapping TypeName="SeguritasModel.scCliente">
+              <MappingFragment StoreEntitySet="scCliente">
+                <ScalarProperty Name="scCId" ColumnName="scCId" />
+                <ScalarProperty Name="scCNombre" ColumnName="scCNombre" />
+                <ScalarProperty Name="scCFechaMod" ColumnName="scCFechaMod" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="scCobertura">
+            <EntityTypeMapping TypeName="SeguritasModel.scCobertura">
+              <MappingFragment StoreEntitySet="scCobertura">
+                <ScalarProperty Name="scCoId" ColumnName="scCoId" />
+                <ScalarProperty Name="scCoNombre" ColumnName="scCoNombre" />
+                <ScalarProperty Name="scCobSuma" ColumnName="scCobSuma" />
+                <ScalarProperty Name="scCoFechaMod" ColumnName="scCoFechaMod" />
+                <ScalarProperty Name="scCoEstatus" ColumnName="scCoEstatus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="scPlan">
+            <EntityTypeMapping TypeName="SeguritasModel.scPlan">
+              <MappingFragment StoreEntitySet="scPlan">
+                <ScalarProperty Name="scPId" ColumnName="scPId" />
+                <ScalarProperty Name="scPNombre" ColumnName="scPNombre" />
+                <ScalarProperty Name="scPFechaMod" ColumnName="scPFechaMod" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="scUsuario">
+            <EntityTypeMapping TypeName="SeguritasModel.scUsuario">
+              <MappingFragment StoreEntitySet="scUsuario">
+                <ScalarProperty Name="scUId" ColumnName="scUId" />
+                <ScalarProperty Name="scUNombre" ColumnName="scUNombre" />
+                <ScalarProperty Name="scUUsuario" ColumnName="scUUsuario" />
+                <ScalarProperty Name="scUPassword" ColumnName="scUPassword" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="soClientePlan">
+            <EntityTypeMapping TypeName="SeguritasModel.soClientePlan">
+              <MappingFragment StoreEntitySet="soClientePlan">
+                <ScalarProperty Name="soCPId" ColumnName="soCPId" />
+                <ScalarProperty Name="soCPCId" ColumnName="soCPCId" />
+                <ScalarProperty Name="soCPPId" ColumnName="soCPPId" />
+                <ScalarProperty Name="soCPEstatus" ColumnName="soCPEstatus" />
+                <ScalarProperty Name="soCPFechaMod" ColumnName="soCPFechaMod" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="soPlanCobertura">
+            <EntityTypeMapping TypeName="SeguritasModel.soPlanCobertura">
+              <MappingFragment StoreEntitySet="soPlanCobertura">
+                <ScalarProperty Name="soPCoId" ColumnName="soPCoId" />
+                <ScalarProperty Name="soPCoPId" ColumnName="soPCoPId" />
+                <ScalarProperty Name="soPCoCoId" ColumnName="soPCoCoId" />
+                <ScalarProperty Name="soPCoEstatus" ColumnName="soPCoEstatus" />
+                <ScalarProperty Name="soPCoFechaMod" ColumnName="soPCoFechaMod" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

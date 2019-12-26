@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="49edb2ada75c40b382138543c9018261" Name="Diagram1">
+        <EntityTypeShape EntityType="SeguritasModel.scCliente" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SeguritasModel.scCobertura" Width="1.5" PointX="3.75" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SeguritasModel.scPlan" Width="1.5" PointX="0.75" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="SeguritasModel.scUsuario" Width="1.5" PointX="0.75" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SeguritasModel.soClientePlan" Width="1.5" PointX="3" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SeguritasModel.soPlanCobertura" Width="1.5" PointX="6" PointY="3.5" IsExpanded="true" />
+        <AssociationConnector Association="SeguritasModel.FK_soClientePlan_CId" ManuallyRouted="false" />
+        <AssociationConnector Association="SeguritasModel.FK_soPlanCobertura_CoId" ManuallyRouted="false" />
+        <AssociationConnector Association="SeguritasModel.FK_soClientePlan_PId" ManuallyRouted="false" />
+        <AssociationConnector Association="SeguritasModel.FK_soPlanCobertura_PId" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
